@@ -235,11 +235,25 @@ namespace Theatre_Seating_Project;
         }
 
         //Assign to Team 4 Member
-        private void ButtonResetSeatingChart(object sender, EventArgs e)
-        {
+    private async void ButtonResetSeatingChart(object sender, EventArgs e){
+    
+    bool confirm = await DisplayAlert("Confirm Reset", "Are you sure you want to reset the seating chart? All reservations will be cleared.", "Yes", "No");
 
+    if (confirm)
+    {
+        for (int i = 0; i < seatingChart.GetLength(0); i++)
+        {
+            for (int j = 0; j < seatingChart.GetLength(1); j++)
+            {
+                seatingChart[i, j].Reserved = false;
+            }
         }
+
+        await DisplayAlert("Success", "All seats have been reset to available.", "Ok");
+        RefreshSeating();
     }
+}
+
 
 
 
